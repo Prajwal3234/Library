@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="global-container">
+        <div class="card login-form">
+        <div class="card-body">
+            <h3 style="color:red;font-weight: bold" class="card-title text-center">Log in to Site</h3>
+            {% if messages %}
+
+            {% for message in messages %}
+            <div class="alert alert-info">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+        {% endif %}
+            <div class="card-text">
+                <!--
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+
+
+<form method="POST" action="" class="login-form">
+  {% csrf_token %}
+<div class="form-group">
+  <label style="font-size: medium;font-weight: bold" for="{{form.username.id_for_label}}">Username:</label><br>
+  {{form.username}}
+  {{form.username.errors}}
+</div>
+
+<div class="form-group">
+  <label style="font-size: medium;font-weight: bold" for="{{form.password.id_for_label}}">Password:</label><br>
+  {{form.password}}
+    {{form.password.errors}}
+</div>
+{% if form.non_field_errors %}
+<div class="non_form_errors">
+  <span class="error">{{form.non_field_errors.as_ul}}</span>
+</div>
+{% endif %}
+<br>
+<input type="submit" value="Login" class="submit-button"/>
+</form>
+<div class="sign-up">
+Don't have an account? <a href="{% url 'register' %}">Create One</a>
+                    </div>
+            </div>
+        </div>
+        </div>
+</div>
+{% endblock %}

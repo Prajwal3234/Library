@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="global-container">
+        <div class="card login-form">
+        <div class="card-body">
+            <h3 style="color: red; font-weight: bold" class="card-title text-center">Register</h3>
+            {% if messages %}
+
+            {% for message in messages %}
+            <div class="alert alert-info">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+        {% endif %}
+            <div class="card-text">
+
+
+<form style="border-color: #006fdc" method="POST" action="" class="register-form">
+  {% csrf_token %}
+<div class="form-group">
+  <label style="font-size: medium;font-weight: bold" for="{{form.email.id_for_label}}">Email:</label><br>
+    {{ form.email }}
+  <span class="error">{{form.email.errors}}</span>
+</div>
+<div class="form-group">
+  <label style="font-size: medium;font-weight: bold" for="{{form.username.id_for_label}}">Username:</label><br>
+  {{form.username}}
+  <span class="error">{{form.username.errors}}</span>
+</div>
+<div class="form-group">
+  <label style="font-size: medium;font-weight: bold" for="{{form.password1.id_for_label}}">Password:</label><br>
+  {{form.password1}}
+  <span class="error">{{form.password1.errors}}</span>
+</div>
+<div class="form-group">
+  <label style="font-size: medium;font-weight: bold" for="{{form.password2.id_for_label}}">Confirm Password:</label>
+  {{form.password2}}
+  <span class="error">{{form.password2.errors}}</span>
+</div>
+{% if form.non_field_errors %}
+<div class="non_form_errors">
+  <span class="error">{{form.non_field_errors.as_ul}}</span>
+</div>
+{% endif %}
+<input type="submit" value="Register" class="submit-button"/>
+<div class="sign-up">
+      Already have an account? <a href="{% url 'login' %}">Log In</a>
+</div>
+</form>
+
+</div>
+{% endblock %}
